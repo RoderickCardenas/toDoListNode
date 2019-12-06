@@ -10,5 +10,11 @@
     "\"RESTful\""
   ],
   "author": "Roderick Cardenas",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
