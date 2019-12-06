@@ -1,7 +1,26 @@
-var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 3000;
+var express = require('express')
+app = express()
+port = process.env.PORT || 3000
+mongoose = require('mongoose')
+Task = require('./api/models/toDoListModel')
+bodyParser = require('body-parser')
 
-app.listen(port);
+mongoose.Promise = global.Promise
+mongoose.connect(
+  'mongodb://localhost/Tododb',
+  { useNewUrlParser: true, useUnifiedTopology: true }
+)
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+var routes = require('./api/routes/toDoListRoutes')
+routes(app)
+
+app.listen(port)
+
+app.use(function (req, res) {
+  res.status(404).send({ url: req.originalUrl + ' not found' })
+})
 
 console.log('toDo list RESTful API server started on:' + port)
